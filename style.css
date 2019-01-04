@@ -1,0 +1,16 @@
+body {
+    background-color: rgb(215, 236, 159);
+}
+
+table {
+    align-items: center;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+table,
+th,
+td {
+    border: 1px solid green;
+    padding: 10px;
+}
