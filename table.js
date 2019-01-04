@@ -14,29 +14,33 @@ https://next.json-generator.com/api/json/get/E1HDvnx1I
 поиск должен взаимодействовать с фильтрами
 */
 
-var getJSON = function(url, callback) {
+// 1. Создаём новый объект XMLHttpRequest
+var xhr = new XMLHttpRequest();
+let ajax;
 
-    var xhr = new XMLHttpRequest();
+// 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+xhr.open('GET', 'https://next.json-generator.com/api/json/get/E1HDvnx1I', false);
+// 3. Отсылаем запрос
+xhr.send();
+// 4. Если код ответа сервера не 200, то это ошибка
+if (xhr.status != 200) {
+  // обработать ошибку
+  alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+} else {
+  // вывести результат
+ ajax = JSON.parse(xhr.responseText); // responseText -- текст ответа.
+}
 
-    xhr.open('GET', url, true);
-    
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status == 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status);
-      }
-    };
-    xhr.send();
-};
+console.log(ajax);
+let tbody = document.querySelector('tbody'); 
 
-getJSON('https://next.json-generator.com/api/json/get/E1HDvnx1I',
-function(err, data) {
-  if (err != null) {
-    alert('Something went wrong: ' + err);
-  } else {
-    alert('Your query count: ' + data.query.count);
-  }
+ajax.forEach(element => { 
+   let row = document.createElement('tr');
+   let arr = [element.name.first, element.name.last, element.sex, element.age, element.email, element.phone, element.company]; 
+   for (let i = 0; i < arr.length; i++) {
+       let td = document.createElement('td');
+       td.innerHTML = arr[i];
+       row.appendChild(td);
+   }
+   tbody.appendChild(row);
 });
