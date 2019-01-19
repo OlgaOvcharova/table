@@ -2,12 +2,23 @@
 <html>
 
 <head>
-    <title>Calendar</title>
+    <title>Table</title>
     <script src="table.js" defer></script>
+   
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"> -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div>
+        <label>
+            Search:
+            <input type="text" id="search" onkeyup="searchInTable(this.value)" placeholder="Search by name, surmane and email...">
+        </label>
+    </div>
+    <form action="">
+
+    </form>
     <div class="table">
         <table>
             <thead>
@@ -20,12 +31,28 @@
                     <td data-sort="5">Phone number</td>
                     <td data-sort="6">Company</td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><select onchange="filtration('sex', this.value)">
+                        <option disabled selected>Select gender:</option>
+                        <option>all</option>
+                        <option>male</option>
+                        <option>female</option></select></td>
+                    <td>
+                        <input type="text" placeholder="from" id="ageFrom" onchange="filtration('min age', this.value)"/>
+                        <input type="text" placeholder="to" id="ageTo" onchange="filtration('max age', this.value)"/>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td><select id="chooseCompany" placeholder="Company" onchange="filtration('company', this.value)">
+                        <option disabled selected>choose company</option>
+                        <option>all</option></select>
+                    </td>
+                </tr>
             </thead>
             <tbody>
-
             </tbody>
         </table>
     </div>
-</body>
-
 </html>
